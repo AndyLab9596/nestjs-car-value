@@ -16,6 +16,7 @@ export class UsersService {
   }
 
   findOne(id: string) {
+    if (!id) return null;
     const foundUser = this.userRepository.findOneBy({ id });
     return foundUser;
   }
