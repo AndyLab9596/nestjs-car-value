@@ -26,7 +26,12 @@ export class UsersController {
 
   @Post('/signup')
   createUser(@Body() createUserDto: CreateUserDto) {
-    this.authService.signup(createUserDto);
+    return this.authService.signup(createUserDto);
+  }
+
+  @Post('/signin')
+  signin(@Body() createUserDto: CreateUserDto) {
+    return this.authService.signin(createUserDto);
   }
 
   // @UseInterceptors(new SerializeInterceptor(UserDto))

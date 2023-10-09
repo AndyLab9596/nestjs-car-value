@@ -7,6 +7,15 @@ content-type: application/json
     "password": "Azxcv@123"
 }
 
+### Sign in
+POST http://localhost:3000/auth/signin
+content-type: application/json
+
+{
+    "email": "stephen@test.com",
+    "password": "Azxcv@123"
+}
+
 ### Find a particular user with a given ID
 GET http://localhost:3000/auth/5ea905ba-142a-43ac-80aa-8066bb11b550
 
