@@ -1,9 +1,13 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common';
+import { APP_PIPE } from '@nestjs/core';
 import { ReportsModule } from './reports/reports.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/user.entity';
 import { Report } from './reports/report.entity';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const cookieSession = require('cookie-session');
 
 @Module({
   imports: [
@@ -21,6 +25,24 @@ import { Report } from './reports/report.entity';
     ReportsModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_PIPE,
+      useValue: new ValidationPipe({
+        whitelist: true,
+        transform: true,
+      }),
+    },
+  ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(
+        cookieSession({
+          keys: ['secret_key'],
+        }),
+      )
+      .forRoutes('*');
+  }
+}
