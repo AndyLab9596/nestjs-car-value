@@ -79,4 +79,9 @@ export class UsersController {
   updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
     return this.userService.update(id, body);
   }
+
+  @Post('/clean')
+  clean() {
+    return this.userService.clean();
+  }
 }

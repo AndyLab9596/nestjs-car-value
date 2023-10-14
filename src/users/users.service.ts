@@ -37,4 +37,8 @@ export class UsersService {
     if (!user) throw new NotFoundException('User not found');
     return this.userRepository.remove(user);
   }
+
+  async clean() {
+    return await this.userRepository.clear();
+  }
 }
