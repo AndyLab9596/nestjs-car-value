@@ -6,6 +6,11 @@ export class Report {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column({
+    default: false,
+  })
+  approved: boolean;
+
   @Column()
   price: number;
 
